@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        main{
+            margin: 0 auto;
+            max-width: 1255px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            
+        }
+        h2 {
+            color: #000000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4e4e4e;
+        }
+        .card-item{
+            display: flex;
+            align-items: centers;
+        }
+        .cart{
+            display: flex;
+        }
+        .card-item{
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.208);
+            position: relative;
+            width: 963px;
+            button{
+                font-size: 30px;
+                background-color: #5b3c3c00;
+                color: #7A7680;
+                width: 50px;
+                height: 50px;
+            }
+            img{
+                margin-right: 19px;
+                width: 80px;
+                height: 80px;
+            }
+            h2{
+                text-align: left;
+                width: 300px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+        .cart-market{
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.208);
+            margin: auto 0;
+            height: 230px;
+            box-shadow: #000000b4;
+            max-width: 292px;
+            button{
+                margin: 30px 29.2px ;
+                width: 233px;
+            }
+        }
+        .delit-button{
+            right: 0;
+            position: absolute;
+        }
+        @media (max-width: 1284px){
+            .card-item{
+                width: 763px;
+            }
+        }
+    </style>
+    <title>автозаправочной станции</title>
+    <header>
+        <h1>АЗС</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Акции</a></li>
+                <li><a href="podpiska.html">Товары</a></li>
+                <li><a href="podpiska-start.html">Корзинка</a></li>
+                <li><a href="revers.html">Связаться с поддержкой</a></li>
+                <li id="profileLink" style="display: none;" class="dropdown">
+                    <span id="usernameDisplay"></span>
+                    <div class="dropdown-content">
+                        <a href="#" id="logoutButton">Выход</a>
+                    </div>
+                </li>
+                <li><a href="login.html" id="loginLink" style="display: inline;">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+                <div class="form-container">
+                    <h2>Корзина</h2>
+                    <section class="cart">
+                        
+                        <div id="cart-items" class="cart-items">
+                            <!-- Товары из корзины будут добавляться сюда -->
+                        </div
+                        <div style="width: 100%;"></div>
+                        <div class="cart-market">
+                            <h1>К оплате</h1>
+                            <div style="display: flex;">
+                                
+                                <p>Итого</p>
+                                <div style="width: 100%;"></div>
+                                <p style="width:  90px; text-align: right;"><span id="total-price">0</span> ₽</p>
+                            </div>
+                            <button onclick="checkout()">Оплатить</button>
+                        </div>
+                    </section>
+                </div>
+    </main>
+
+    <footer>
+        <p>АЗС</p>
+    </footer>
+
+
+    </body>
+    <script src="script.js"></script>
+</html>

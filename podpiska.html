@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="podpiska.css">
+    <style>
+
+        .product {
+            border-radius: 10px;
+            color: #fff;
+            border: 1px solid #ccc;
+            background-color: #DB2B36;
+            padding: 10px;
+            margin: 10px;
+            height: 450px;
+            width:300px;
+            text-align: center;
+        }
+    </style>
+    <title>автозаправочной станции</title>
+    <header>
+        <h1>АЗС</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Акции</a></li>
+                <li><a href="podpiska.html">Товары</a></li>
+                <li><a href="podpiska-start.html">Корзинка</a></li>
+                <li><a href="revers.html">Связаться с поддержкой</a></li>
+                <li id="profileLink" style="display: none;" class="dropdown">
+                    <span id="usernameDisplay"></span>
+                    <div class="dropdown-content">
+                        <a href="#" id="logoutButton">Выход</a>
+                    </div>
+                </li>
+                <li><a href="login.html" id="loginLink" style="display: inline;">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="products cards-container" id="products">
+            <!-- Товары будут добавляться сюда через JavaScript -->
+        </section>
+    </main>
+    <footer>
+        <p>АЗС</p>
+    </footer>
+
+    </body>
+    <script src="script.js"></script>
+</html>
