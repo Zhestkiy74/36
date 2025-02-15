@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Администрация</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style-admin.css">
+    <style>
+        .columen{
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>АЗС</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Акции</a></li>
+                <li><a href="goods.html">Товары</a></li>
+                <li><a href="basket.html">Корзинка</a></li>
+                <li><a href="support.html">Связаться с поддержкой</a></li>
+                <li id="profileLink" style="display: none;" class="dropdown">
+                    <span id="usernameDisplay"></span>
+                    <div class="dropdown-content">
+                        <a href="#" id="logoutButton">Выход</a>
+                    </div>
+                </li>
+                <li><a href="login.html" id="loginLink" style="display: inline;">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="columen">
+        <div class="admin-container">
+            <h1>Добавить новую карточку</h1>
+            <input type="text" id="cardTitle" placeholder="Заголовок карточки">
+            <input type="text" id="cardDescription" placeholder="Описание карточки">
+            <input type="text" id="cardImage" placeholder="Ссылка на изображение">
+            <input type="text" id="li1" placeholder="первый пукт">
+            <input type="text" id="li2" placeholder="второй пукт">
+            <button onclick="addCard()">Добавить карточку</button>  
+            <button onclick="resetCards()">Сбросить все карточки</button>
+        </div>
+        <section class="admin-container">
+            <h1>Добавить новый товар</h1>   
+            <form id="add-product-form">
+                <input type="text" id="product-name" name="product-name" placeholder="Заголовок карточки" required>
+                <input type="text" id="product-image" name="product-image" placeholder="Ссылка на ихображение" required>
+                <input type="number" id="product-price" name="product-price" placeholder="Ценна за литр" required>
+                <input type="text" id="product-description" name="product-description" placeholder="Ценна" required>
+
+                <button type="submit">Добавить товар</button>
+                
+            </form>
+            <button onclick="resetProducts()">Сбросить все товары</button>
+        </section>
+        <h2>Раздел для администрации</h2>
+        <section>
+            <h3>Управление пользователями</h3>
+            <p>Добавляйте и удаляйте пользователей, управляйте их правами доступа.</p>
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Имя пользователя</th>
+                        <th>Email</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Данные пользователей будут добавлены здесь -->
+                </tbody>
+            </table>
+        </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>АЗС</p>
+    </footer>
+
+
+
+
+
+
+    <script src="script.js"></script>
+    <script>
+        // Проверка авторизации пользователя
+        const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
+
+        if (username && email) {
+            document.getElementById('usernameDisplay').innerText = username;
+            document.getElementById('profileLink').style.display = 'inline-block';
+            document.getElementById('loginLink').style.display = 'none';
+        } else {
+            document.getElementById('profileLink').style.display = 'none';
+            document.getElementById('loginLink').style.display = 'inline';
+        }
+
+        // Обработка выхода
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            window.location.reload(); // Перезагрузка страницы
+        });
+
+        // Функция для отображения пользователей
+        function displayUsers() {
+            const userProfiles = JSON.parse(localStorage.getItem('userProfiles')) || {};
+            const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            userTableBody.innerHTML = ''; // Очищаем таблицу перед добавлением
+
+            for (const email in userProfiles) {
+                const row = userTableBody.insertRow();
+                const usernameCell = row.insertCell(0);
+                const emailCell = row.insertCell(1);
+                const actionsCell = row.insertCell(2);
+
+                usernameCell.innerText = userProfiles[email].username;
+                emailCell.innerText = email;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = 'Удалить';
+                deleteButton.className = 'delete-button';
+                deleteButton.onclick = function() {
+                    deleteUser (email);
+                };
+                actionsCell.appendChild(deleteButton);
+            }
+        }
+
+        // Функция для удаления пользователя
+        function deleteUser (email) {
+            const userProfiles = JSON.parse(localStorage.getItem('userProfiles')) || {};
+            delete userProfiles[email];
+            localStorage.setItem('userProfiles', JSON.stringify(userProfiles));
+            displayUsers(); // Обновляем отображение пользователей
+        }
+
+        // Инициализация отображения пользователей при загрузке страницы
+        displayUsers();
+
+
+
+
+
+
+
+
+
+// Предопределенные товары
+const defaultProducts = [
+{
+                name: "Масло моторное LUKOIL GENESIS АВИАРЯТЕСН 5W-40 1 л",
+                image: "./image.png",
+                price: "1911",
+                description: "1911P/1л"
+            },
+            {
+                name: "Масло моторное LUKOIL GENESIS АВИАРЯТЕСН 5W-40 1 л",
+                image: "./image.png",
+                price: "1911",
+                description: "1911P/1л"
+            },
+            {
+                name: "Масло моторное LUKOIL GENESIS АВИАРЯТЕСН 5W-40 1 л",
+                image: "./image.png",
+                price: "1911",
+                description: "1911P/1л"
+            },
+            {
+                name: "Масло моторное LUKOIL GENESIS АВИАРЯТЕСН 5W-40 1 л",
+                image: "./image.png",
+                price: "1911",
+                description: "1911P/1л"
+            },
+];
+
+// Функция для добавления нового товара
+function addProduct(event) {
+    event.preventDefault(); // Предотвращаем перезагрузку страницы
+
+    // Получаем данные из формы
+    const productName = document.getElementById('product-name').value;
+    const productImage = document.getElementById('product-image').value;
+    const productPrice = parseFloat(document.getElementById('product-price').value);
+    const productDescription = document.getElementById('product-description').value;
+
+    // Создаем объект товара
+    const newProduct = {
+        name: productName,
+        image: productImage,
+        price: productPrice,
+        description: productDescription
+    };
+
+    // Получаем текущий массив товаров из localStorage
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+
+    // Добавляем новый товар в массив
+    products.push(newProduct);
+
+    // Сохраняем обновленный массив в localStorage
+    localStorage.setItem('products', JSON.stringify(products));
+
+    // Очищаем форму
+    document.getElementById('add-product-form').reset();
+
+    // Уведомляем администратора
+    alert('Товар успешно добавлен!');
+}
+
+// Функция для сброса списка товаров и добавления 3 карточек по умолчанию
+function resetProducts() {
+        // Добавляем 3 предопределенных товара
+        localStorage.setItem('products', JSON.stringify(defaultProducts));
+}
+// Инициализация формы
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('add-product-form');
+    form.addEventListener('submit', addProduct);
+});
+
+resetProducts();
+    </script>
+</body>
+</html>
